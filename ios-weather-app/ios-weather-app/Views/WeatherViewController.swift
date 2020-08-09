@@ -56,6 +56,7 @@ class WeatherViewController: UIViewController {
     }
 
     @IBAction func addLocationButtonTapped(_ sender: Any) {
+        performSegue(withIdentifier: "showAddCity", sender: nil)
     }
     
     @IBAction func locationButtonTapped(_ sender: Any) {
