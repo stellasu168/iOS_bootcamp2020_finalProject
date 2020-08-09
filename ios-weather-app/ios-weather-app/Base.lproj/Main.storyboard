@@ -92,7 +92,7 @@
                                 <rect key="frame" x="67" y="194" width="280" height="239"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="TpJ-LS-sg5">
-                                        <rect key="frame" x="24" y="24" width="232" height="170"/>
+                                        <rect key="frame" x="24" y="14" width="232" height="170"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter City" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="urs-2e-SWo">
                                                 <rect key="frame" x="0.0" y="0.0" width="232" height="40"/>
@@ -127,9 +127,9 @@
                                             </activityIndicatorView>
                                         </subviews>
                                     </stackView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Status" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYz-ec-1BY">
-                                        <rect key="frame" x="24" y="206" width="232" height="25"/>
-                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Status" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYz-ec-1BY">
+                                        <rect key="frame" x="24" y="212" width="232" height="20"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="16"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -140,10 +140,10 @@
                                     <constraint firstAttribute="trailing" secondItem="TpJ-LS-sg5" secondAttribute="trailing" constant="24" id="Eoe-zx-Ued"/>
                                     <constraint firstItem="nYz-ec-1BY" firstAttribute="leading" secondItem="TpJ-LS-sg5" secondAttribute="leading" id="FYE-py-ka0"/>
                                     <constraint firstItem="TpJ-LS-sg5" firstAttribute="leading" secondItem="fkm-Zh-VaT" secondAttribute="leading" constant="24" id="OFj-Qx-yjT"/>
-                                    <constraint firstItem="nYz-ec-1BY" firstAttribute="bottom" secondItem="fkm-Zh-VaT" secondAttribute="bottomMargin" id="RAa-zh-Dnb"/>
-                                    <constraint firstItem="TpJ-LS-sg5" firstAttribute="top" secondItem="fkm-Zh-VaT" secondAttribute="top" constant="24" id="RCh-fd-m8Z"/>
+                                    <constraint firstItem="nYz-ec-1BY" firstAttribute="bottom" secondItem="fkm-Zh-VaT" secondAttribute="bottomMargin" constant="1" id="RAa-zh-Dnb"/>
+                                    <constraint firstItem="TpJ-LS-sg5" firstAttribute="top" secondItem="fkm-Zh-VaT" secondAttribute="top" constant="14" id="RCh-fd-m8Z"/>
                                     <constraint firstItem="nYz-ec-1BY" firstAttribute="trailing" secondItem="TpJ-LS-sg5" secondAttribute="trailing" id="fqJ-OA-HPy"/>
-                                    <constraint firstAttribute="bottom" secondItem="TpJ-LS-sg5" secondAttribute="bottom" constant="45" id="kyl-EK-GTE"/>
+                                    <constraint firstAttribute="bottom" secondItem="TpJ-LS-sg5" secondAttribute="bottom" constant="55" id="kyl-EK-GTE"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -164,7 +164,7 @@
                         <outlet property="activityIndicatorView" destination="pxL-ye-dcb" id="hq2-Ec-coc"/>
                         <outlet property="cityTextField" destination="u4f-hK-mEK" id="2y6-iH-kVI"/>
                         <outlet property="searchButton" destination="e9a-so-pCa" id="RkX-qZ-cXp"/>
-                        <outlet property="statusLabl" destination="nYz-ec-1BY" id="puv-PU-T3S"/>
+                        <outlet property="statusLabel" destination="nYz-ec-1BY" id="puv-PU-T3S"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PUY-7i-SVe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
