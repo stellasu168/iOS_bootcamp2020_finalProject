@@ -118,6 +118,9 @@
                                                 <state key="normal" title="Search">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="searchButtonTapped:" destination="ZoL-4m-zoa" eventType="touchUpInside" id="gYn-Ql-59w"/>
+                                                </connections>
                                             </button>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="pxL-ye-dcb">
                                                 <rect key="frame" x="0.0" y="150" width="232" height="20"/>
@@ -157,6 +160,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Idy-8l-VRT"/>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicatorView" destination="pxL-ye-dcb" id="hq2-Ec-coc"/>
+                        <outlet property="cityTextField" destination="u4f-hK-mEK" id="2y6-iH-kVI"/>
+                        <outlet property="searchButton" destination="e9a-so-pCa" id="RkX-qZ-cXp"/>
+                        <outlet property="statusLabl" destination="nYz-ec-1BY" id="puv-PU-T3S"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PUY-7i-SVe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
