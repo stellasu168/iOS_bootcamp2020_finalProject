@@ -14,7 +14,7 @@ struct WeatherManager {
     private let API_Key = "0298d254977db08da0e4235109243777"
     
     // Use completion handler to return the data
-    func fetchWeather(byCity city: String, completion: @escaping (Result<WeatherData, Error>) -> Void){
+    func fetchWeather(byCity city: String, completion: @escaping (Result<WeatherModel, Error>) -> Void){
         
         // Encoding because if user type in a space or whatever, you can handle it
         let query = city.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? city
@@ -25,7 +25,8 @@ struct WeatherManager {
             switch response.result {
             case .success(let weatherData):
                 print("weatherData: \(weatherData)")
-                completion(.success(weatherData))
+                let model = weatherData.model
+                completion(.success(model))
             case .failure(let error):
                 completion(.failure(error))
             }
