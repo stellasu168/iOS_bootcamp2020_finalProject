@@ -17,6 +17,8 @@ class AddCityViewController: UIViewController {
     
     private let weatherManager = WeatherManager()
     
+    weak var delegate: WeatherViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -53,6 +55,7 @@ class AddCityViewController: UIViewController {
     }
     
     private func handleSearch(query: String) {
+        view.endEditing(true)
         activityIndicatorView.startAnimating()
         // Add weak self to avoid a renten cycle
         weatherManager.fetchWeather(byCity: query) { [weak self] (result) in
@@ -72,6 +75,12 @@ class AddCityViewController: UIViewController {
         statusLabel.isHidden = false
         statusLabel.textColor = .systemGreen
         statusLabel.text = "Success!"
+        // How do we tell who owns the delegate?
+        // We passed 'self' in the prepare for segue function
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            [weak self] in
+            self?.delegate?.didUpdateWeatherFromSearch(model: model)
+        }
     }
     
     private func showSearchError(text: String) {
