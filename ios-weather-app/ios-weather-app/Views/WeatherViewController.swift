@@ -24,7 +24,7 @@ class WeatherViewController: UIViewController {
     }
     
     private func fetchWeather(){
-        weatherManager.fetchWeather(byCity: "Sydney") { [weak self] (result) in
+        weatherManager.fetchWeather(byCity: "New York") { [weak self] (result) in
             guard let this = self else { return }
             switch result {
             case .success(let model):
