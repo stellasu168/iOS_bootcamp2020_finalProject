@@ -43,7 +43,7 @@ class WeatherViewController: UIViewController {
         hideAnimation()
         temperatureLabel.text = model.temp.toString().appending("°C")
         conditionLabel.text = model.conditionDescription
-        navigationItem.title = model.countryName
+        navigationItem.title = model.cityName
         conditionImageView.image = UIImage(named: model.conditionImage)
 
     }

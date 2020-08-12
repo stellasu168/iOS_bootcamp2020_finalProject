@@ -15,7 +15,7 @@ struct WeatherData: Decodable {
     
     // A computed property
     var model: WeatherModel {
-        return WeatherModel(countryName: name, temp: main.temp.toInt(), conditionId: weather.first?.id ?? 0, conditionDescription:  weather.first?.description ?? "")
+        return WeatherModel(cityName: name, temp: main.temp.toInt(), conditionId: weather.first?.id ?? 0, conditionDescription:  weather.first?.description ?? "")
     }
 }
 
@@ -32,7 +32,7 @@ struct Weather: Decodable {
 // A view model - convert from the WeatherData struct so it's easier to access
 struct WeatherModel {
     
-    let countryName: String
+    let cityName: String
     let temp: Int
     let conditionId: Int
     let conditionDescription: String
