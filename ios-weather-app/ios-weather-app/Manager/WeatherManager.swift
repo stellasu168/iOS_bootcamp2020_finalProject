@@ -29,38 +29,85 @@ enum WeatherError: Error, LocalizedError {
 struct WeatherManager {
     private let API_Key = "0298d254977db08da0e4235109243777"
     
+    func fetchWeather(lat: Double, lon: Double, completion: @escaping (Result<WeatherModel, Error>) -> Void) {
+            
+            // Encoding because if user type in a space or whatever, you can handle it
+            // api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={your api key}
+            let path = "https://api.openweathermap.org/data/2.5/weather?appid=%@&units=metric&lat=%f&lon=%f"
+            let urlString = String(format: path, API_Key, lat, lon)
+            
+            handleRequest(urlString: urlString, completion: completion)
+
+//            AF.request(urlString)
+//                .validate()
+//                .responseDecodable(of: WeatherData.self, queue: .main, decoder: JSONDecoder()) { (response) in
+//                switch response.result {
+//                case .success(let weatherData):
+//                    print("weatherData: \(weatherData)")
+//                    let model = weatherData.model
+//                    completion(.success(model))
+//                case .failure(let error):
+//                    if let err = self.getWeatherError(error: error, data: response.data) {
+//                        completion(.failure(err))
+//                    } else {
+//                        completion(.failure(error))
+//                    }
+//                }
+//            }
+        }
+    
     // Use completion handler to return the data
     func fetchWeather(byCity city: String, completion: @escaping (Result<WeatherModel, Error>) -> Void) {
-        
+
         // Encoding because if user type in a space or whatever, you can handle it
         let query = city.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) ?? city
         let path = "https://api.openweathermap.org/data/2.5/weather?q=%@&appid=%@&units=metric"
         let urlString = String(format: path, query, API_Key)
+
+        handleRequest(urlString: urlString, completion: completion)
         
-        AF.request(urlString)
-            .validate()
-            .responseDecodable(of: WeatherData.self, queue: .main, decoder: JSONDecoder()) { (response) in
-            switch response.result {
-            case .success(let weatherData):
-                print("weatherData: \(weatherData)")
-                let model = weatherData.model
-                completion(.success(model))
-            case .failure(let error):
-                if let err = self.getWeatherError(error: error, data: response.data) {
-                    completion(.failure(err))
-                } else {
-                    completion(.failure(error))
-                }
-//                if error.responseCode == 404 {
-//                    let invalidCityError = WeatherError.custom(description: "this is random")
-//                    completion(.failure(invalidCityError))
+//        AF.request(urlString)
+//            .validate()
+//            .responseDecodable(of: WeatherData.self, queue: .main, decoder: JSONDecoder()) { (response) in
+//            switch response.result {
+//            case .success(let weatherData):
+//                print("weatherData: \(weatherData)")
+//                let model = weatherData.model
+//                completion(.success(model))
+//            case .failure(let error):
+//                if let err = self.getWeatherError(error: error, data: response.data) {
+//                    completion(.failure(err))
 //                } else {
 //                    completion(.failure(error))
 //                }
-            }
-        }
+////                if error.responseCode == 404 {
+////                    let invalidCityError = WeatherError.custom(description: "this is random")
+////                    completion(.failure(invalidCityError))
+////                } else {
+////                    completion(.failure(error))
+////                }
+//            }
+//        }
     }
     
+    private func handleRequest(urlString: String, completion: @escaping (Result<WeatherModel, Error>) -> Void) {
+        AF.request(urlString)
+             .validate()
+             .responseDecodable(of: WeatherData.self, queue: .main, decoder: JSONDecoder()) { (response) in
+             switch response.result {
+             case .success(let weatherData):
+                 print("weatherData: \(weatherData)")
+                 let model = weatherData.model
+                 completion(.success(model))
+             case .failure(let error):
+                 if let err = self.getWeatherError(error: error, data: response.data) {
+                     completion(.failure(err))
+                 } else {
+                     completion(.failure(error))
+                 }
+             }
+         }
+    }
     private func getWeatherError(error: AFError, data: Data?) -> Error? {
         if error.responseCode == 404,
             let data = data,

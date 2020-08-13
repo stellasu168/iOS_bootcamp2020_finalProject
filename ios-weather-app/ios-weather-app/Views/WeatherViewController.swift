@@ -87,6 +87,7 @@ class WeatherViewController: UIViewController {
             locationManager.requestLocation()
         case .notDetermined:
             locationManager.requestWhenInUseAuthorization()
+            locationManager.requestLocation()
         default:
             promptForLocationPermission()
         }
@@ -119,7 +120,25 @@ extension WeatherViewController: WeatherViewControllerDelegate {
 // Implement the delegate here:
 extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
+        print(locations)
+        if let location = locations.last{
+            manager.stopUpdatingLocation()
+            let lat = location.coordinate.latitude
+            let long = location.coordinate.longitude
+            print(lat, long)
+            
+            weatherManager.fetchWeather(lat: lat, lon: long) { (result) in
+                switch result {
+                case .success(let model):
+                    // We want to move this thread to the main thread since this is happening in the background
+                    DispatchQueue.main.async {
+                        self.updateView(with: model)
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
