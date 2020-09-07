@@ -92,10 +92,10 @@
 		715BC23224D2B89D00A1F479 /* ios-weather-app */ = {
 			isa = PBXGroup;
 			children = (
+				7183385424DD17A00002CE13 /* Controls */,
 				7183385524DD1C3B0002CE13 /* Extension */,
-				7183384F24DCCBC60002CE13 /* Manager */,
 				7183384E24DCCBA10002CE13 /* Model */,
-				7183385424DD17A00002CE13 /* Views */,
+				7183384F24DCCBC60002CE13 /* Manager */,
 				715BC23324D2B89D00A1F479 /* AppDelegate.swift */,
 				715BC23524D2B89D00A1F479 /* SceneDelegate.swift */,
 				715BC23E24D2B8A000A1F479 /* LaunchScreen.storyboard */,
@@ -123,13 +123,13 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		7183385424DD17A00002CE13 /* Views */ = {
+		7183385424DD17A00002CE13 /* Controls */ = {
 			isa = PBXGroup;
 			children = (
 				715BC23724D2B89D00A1F479 /* WeatherViewController.swift */,
 				7183385824DF7F750002CE13 /* AddCityViewController.swift */,
 			);
-			path = Views;
+			path = Controls;
 			sourceTree = "<group>";
 		};
 		7183385524DD1C3B0002CE13 /* Extension */ = {

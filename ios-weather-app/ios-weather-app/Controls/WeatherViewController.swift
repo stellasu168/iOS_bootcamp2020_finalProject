@@ -31,19 +31,34 @@ class WeatherViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showAnimation()
-        fetchWeather()
+        fetchWeather(byCity: "Berlin")
     }
     
-    private func fetchWeather(){
-        weatherManager.fetchWeather(byCity: "New York") { [weak self] (result) in
+    private func fetchWeather(byLocation location: CLLocation){
+        showAnimation()
+        let lat = location.coordinate.latitude
+        let lon = location.coordinate.longitude
+        weatherManager.fetchWeather(lat: lat, lon: lon) { [weak self](result) in
             guard let this = self else { return }
-            switch result {
-            case .success(let model):
-                this.updateView(with: model)
-            case .failure(let error):
-                print(error)
-            }
+            this.handleResult(result)
+        }
+    }
+    
+    private func fetchWeather(byCity city: String){
+        showAnimation()
+        weatherManager.fetchWeather(byCity: city) { [weak self] (result) in
+            guard let this = self else { return }
+            this.handleResult(result)
+
+        }
+    }
+    
+    private func handleResult(_ result: Result<WeatherModel, Error>){
+        switch result {
+        case .success(let model):
+            updateView(with: model)
+        case .failure(let error):
+            print(error)
         }
     }
     
@@ -123,21 +138,22 @@ extension WeatherViewController: CLLocationManagerDelegate {
         print(locations)
         if let location = locations.last{
             manager.stopUpdatingLocation()
-            let lat = location.coordinate.latitude
-            let long = location.coordinate.longitude
-            print(lat, long)
-            
-            weatherManager.fetchWeather(lat: lat, lon: long) { (result) in
-                switch result {
-                case .success(let model):
-                    // We want to move this thread to the main thread since this is happening in the background
-                    DispatchQueue.main.async {
-                        self.updateView(with: model)
-                    }
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
+            fetchWeather(byLocation: location)
+//            let lat = location.coordinate.latitude
+//            let long = location.coordinate.longitude
+//            print(lat, long)
+//
+//            weatherManager.fetchWeather(lat: lat, lon: long) { (result) in
+//                switch result {
+//                case .success(let model):
+//                    // We want to move this thread to the main thread since this is happening in the background
+//                    DispatchQueue.main.async {
+//                        self.updateView(with: model)
+//                    }
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                }
+//            }
         }
     }
     
